@@ -10,6 +10,7 @@ public class ChoiceBodyImpl implements ChoiceBody {
 
     @Override
     public void chooseBody(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
+        car.setBody(null);
         printerWrapper.print("Press 1 to choose SEDAN \nPress 2 to choose HATCHBACK \nPress 0 to back");
         int option = scannerWrapper.nextInt();
         switch (option) {

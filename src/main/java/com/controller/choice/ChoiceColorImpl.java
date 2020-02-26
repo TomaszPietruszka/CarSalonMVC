@@ -10,7 +10,7 @@ public class ChoiceColorImpl implements ChoiceColor {
     @Override
     public void chooseColor(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         printerWrapper.print("Press 1 to choose white car \nPress 2 to choose red car \nPress 0 to back");
-
+        car.setColor(null);
         int option = scannerWrapper.nextInt();
         switch (option) {
             case 1:

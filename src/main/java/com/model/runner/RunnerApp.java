@@ -5,6 +5,4 @@ import com.model.CarSalonMVC;
 
 public interface RunnerApp {
     void run(CarSalonMVC.Controller carSalonMVC, PrinterWrapper printerWrapper);
-
-
 }

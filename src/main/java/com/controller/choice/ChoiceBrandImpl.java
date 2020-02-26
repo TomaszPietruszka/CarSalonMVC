@@ -11,7 +11,7 @@ public class ChoiceBrandImpl implements ChoiceBrand {
     @Override
     public void chooseBrand(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         printerWrapper.print("Press 1 to choose BMW \nPress 2 to choose AUDI \nPress 0 to back");
-
+        car.setBrand(null);
         int option = scannerWrapper.nextInt();
         switch (option) {
             case 1:

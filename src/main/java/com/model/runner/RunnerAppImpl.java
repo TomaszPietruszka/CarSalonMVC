@@ -8,45 +8,44 @@ public class RunnerAppImpl implements RunnerApp {
 
     @Override
     public void run(CarSalonMVC.Controller carSalonMVC, PrinterWrapper printerWrapper) {
-        int i = 0;
+        int choice = 0;
         while (true) {
-            switch (i) {
+            switch (choice) {
                 case 0:
                     printerWrapper.print("Create your own car!");
                     carSalonMVC.createCar();
                     break;
                 case 1:
-                    i = setCaseOne(carSalonMVC, printerWrapper, i);
+                    choice = setCaseOne(carSalonMVC, printerWrapper, choice);
                     break;
                 case 2:
                     printerWrapper.print("Choose brand: ");
                     carSalonMVC.chooseBrand();
                     if (carSalonMVC.getCar().getBrand() == null) {
-                        i -= 2;
+                        choice -= 2;
                     }
                     break;
                 case 3:
                     printerWrapper.print("Choose color: ");
                     carSalonMVC.chooseColor();
                     if (carSalonMVC.getCar().getColor() == null) {
-                        i -= 2;
+                        choice -= 2;
                     }
                     break;
                 case 4:
                     printerWrapper.print("Choose fuel: ");
                     carSalonMVC.chooseFuel();
                     if (carSalonMVC.getCar().getFuel() == null) {
-                        i -= 2;
+                        choice -= 2;
                     }
                     break;
                 case 5:
                     printerWrapper.print("Created car:");
-                    if (carSalonMVC.getCar().getFuel() != null) {
-                        carSalonMVC.getCar();
-                    }
+                    carSalonMVC.getCar();
+                    printerWrapper.print(carSalonMVC.getCar().toString());
                     return;
             }
-            i++;
+            choice++;
         }
     }
 

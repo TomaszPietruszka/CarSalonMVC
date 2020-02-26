@@ -10,6 +10,7 @@ public class ChoiceFuelImpl implements ChoiceFuel {
     @Override
     public void chooseFuel(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         printerWrapper.print("Press 1 to choose petrol \nPress 2 to choose diesel \nPress 0 to back");
+        car.setFuel(null);
         int option = scannerWrapper.nextInt();
         switch (option) {
             case 1:
