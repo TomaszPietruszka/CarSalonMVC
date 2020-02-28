@@ -59,7 +59,7 @@ public class CarSalonControllerImpl implements CarSalonMVC.Controller {
 
     @Override
     public boolean finish() {
-       return finish.finish(car, wallet, scannerWrapper, printerWrapper);
+        return finish.finish(car, wallet, scannerWrapper, printerWrapper);
     }
 
     @Override

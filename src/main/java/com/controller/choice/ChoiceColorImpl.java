@@ -6,12 +6,12 @@ import com.model.carParts.Car;
 import com.model.wallet.Wallet;
 import com.model.carParts.Color;
 
-public class ChoiceColorImpl extends ChoiceSetter implements ChoiceColor {
+public class ChoiceColorImpl implements ChoiceColor {
 
     @Override
     public void chooseColor(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         if (car.getColor() != null) {
-            turnMoneyBack(wallet, printerWrapper, car.getColor().price);
+            wallet.turnMoneyBack(printerWrapper, car.getColor().price);
             car.setColor(null);
         }
 
@@ -32,19 +32,18 @@ public class ChoiceColorImpl extends ChoiceSetter implements ChoiceColor {
         }
     }
 
-    public void setCase(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper, Color color) {
+    private void setCase(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper, Color color) {
         if (wallet.getMoney() <= color.price) {
             printerWrapper.print("You haven't enough money");
             chooseColor(car, wallet, scannerWrapper, printerWrapper);
         } else {
             car.setColor(color);
-            takeMoney(wallet, printerWrapper, car.getColor().price);
+            wallet.takeMoney(printerWrapper, car.getColor().price);
             printerWrapper.print("You choose " + car.getColor() + " color");
         }
     }
 
-    @Override
-    int getOption(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
+    private int getOption(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         int option = scannerWrapper.nextInt();
         int lowBound = 0;
         int highBound = Color.values().length;
@@ -58,8 +57,7 @@ public class ChoiceColorImpl extends ChoiceSetter implements ChoiceColor {
         }
     }
 
-    @Override
-    void printOptions(PrinterWrapper printerWrapper) {
+    private void printOptions(PrinterWrapper printerWrapper) {
         int number = 0;
         for (Color value : Color.values()) {
             number++;

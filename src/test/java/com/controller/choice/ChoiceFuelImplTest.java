@@ -5,74 +5,109 @@ import com.controller.scanner.ScannerWrapper;
 import com.model.carParts.Car;
 import com.model.wallet.Wallet;
 import com.model.carParts.Fuel;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ChoiceFuelImplTest {
-    Wallet wallet = new Wallet(2000);
+    Wallet wallet = new Wallet(20000);
     Car car = new Car();
     PrinterWrapper printerWrapper = Mockito.mock(PrinterWrapper.class);
     ScannerWrapper scannerWrapper = Mockito.mock(ScannerWrapper.class);
     ChoiceFuel tested = new ChoiceFuelImpl();
 
-/*
     @Test
-    public void choosePetrolFuel() {
+    public void successfulChoosePetrol() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
         tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
-        Mockito.verify(printerWrapper).print("PETROL");
-        Assertions.assertEquals(Fuel.PETROL, car.getFuel());
+        assertEquals(Fuel.PETROL, car.getFuel());
     }
 
     @Test
-    public void ChooseDieselFuel(){
+    public void doNotTakeMoneyForPetrol() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        assertEquals(20000, wallet.getMoney());
+    }
+
+    @Test
+    public void printGetPetrolMessage() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("You choose PETROL fuel");
+    }
+
+    @Test
+    public void successfulChooseDiesel() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(2);
         tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
-        Mockito.verify(printerWrapper).print("DIESEL");
-        Assertions.assertEquals(Fuel.DIESEL, car.getFuel());
+        assertEquals(Fuel.DIESEL, car.getFuel());
     }
 
     @Test
-    public void failChoosePetrolFuel() {
-        wallet = new Wallet(-1);
-        Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
-        Assertions.assertThrows(IllegalStateException.class, () -> tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper));
-    }
-
-    @Test
-    public void failChooseDieselFuel(){
-        wallet = new Wallet(-1);
+    public void doNotTakeMoneyForDiesel() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(2);
-        Assertions.assertThrows(IllegalStateException.class, () -> tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper));
-    }
-*/
-
-
-    @Test
-    public void tryMinusValueOverBound() {
-        Mockito.when(scannerWrapper.nextInt()).thenReturn(-100);
-        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper));
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        assertEquals(19000, wallet.getMoney());
     }
 
     @Test
-    public void tryMinusOneValueOverBound() {
-        Mockito.when(scannerWrapper.nextInt()).thenReturn(-1);
-        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper));
+    public void printGetDieselMessage() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(2);
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("You choose DIESEL fuel");
     }
 
 
     @Test
-    public void tryPlusValueOverBound() {
-        Mockito.when(scannerWrapper.nextInt()).thenReturn(400);
-        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper));
+    public void successfulChooseHybrid() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(3);
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        assertEquals(Fuel.HYBRID, car.getFuel());
+    }
+
+    @Test
+    public void doNotTakeMoneyForHybrid() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(3);
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        assertEquals(15000, wallet.getMoney());
+    }
+
+    @Test
+    public void printGetHybridMessage() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(3);
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("You choose HYBRID fuel");
     }
 
 
     @Test
-    public void tryPlusOneValueOverBound() {
-        Mockito.when(scannerWrapper.nextInt()).thenReturn(4);
-        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper));
+    public void trySetOneMinusOutOfBound() {
+        Mockito.doReturn(-1, 1).when(scannerWrapper).nextInt();
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("Wrong number!");
+    }
+
+    @Test
+    public void trySetOneHundredMinusOutOfBound() {
+        Mockito.doReturn(-100, 1).when(scannerWrapper).nextInt();
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("Wrong number!");
+    }
+
+    @Test
+    public void trySetOnePlusOutOfBound() {
+        Mockito.doReturn(4, 1).when(scannerWrapper).nextInt();
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("Wrong number!");
+    }
+
+    @Test
+    public void  trySetOneHundredPlusOutOfBound() {
+        Mockito.doReturn(100, 1).when(scannerWrapper).nextInt();
+        tested.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        Mockito.verify(printerWrapper).print("Wrong number!");
     }
 
 

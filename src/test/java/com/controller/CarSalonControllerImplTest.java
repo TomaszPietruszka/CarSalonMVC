@@ -52,4 +52,11 @@ class CarSalonControllerImplTest {
         Mockito.verify(choiceFuel).chooseFuel(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
     }
 
+    @Test
+    public void finish() {
+        tested.createCar();
+        tested.finish();
+        Mockito.verify(finish).finish(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
+    }
+
 }

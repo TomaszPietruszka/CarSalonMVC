@@ -6,12 +6,12 @@ import com.model.carParts.Car;
 import com.model.wallet.Wallet;
 import com.model.carParts.Fuel;
 
-public class ChoiceFuelImpl extends ChoiceSetter implements ChoiceFuel {
+public class ChoiceFuelImpl implements ChoiceFuel {
 
     @Override
     public void chooseFuel(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         if (car.getFuel() != null) {
-            turnMoneyBack(wallet, printerWrapper, car.getFuel().price);
+            wallet.turnMoneyBack(printerWrapper, car.getFuel().price);
             car.setFuel(null);
         }
 
@@ -32,19 +32,18 @@ public class ChoiceFuelImpl extends ChoiceSetter implements ChoiceFuel {
         }
     }
 
-    public void setCase(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper, Fuel fuel) {
+    private void setCase(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper, Fuel fuel) {
         if (wallet.getMoney() <= fuel.price) {
             printerWrapper.print("You haven't enough money");
             chooseFuel(car, wallet, scannerWrapper, printerWrapper);
         } else {
             car.setFuel(fuel);
-            takeMoney(wallet, printerWrapper, car.getFuel().price);
+            wallet.takeMoney(printerWrapper, car.getFuel().price);
             printerWrapper.print("You choose " + car.getFuel() + " fuel");
         }
     }
 
-    @Override
-    int getOption(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
+    private int getOption(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
         int option = scannerWrapper.nextInt();
         int lowBound = 0;
         int highBound = Fuel.values().length;
@@ -58,8 +57,7 @@ public class ChoiceFuelImpl extends ChoiceSetter implements ChoiceFuel {
         }
     }
 
-    @Override
-    void printOptions(PrinterWrapper printerWrapper) {
+    private void printOptions(PrinterWrapper printerWrapper) {
         int number = 0;
         for (Fuel value : Fuel.values()) {
             number++;

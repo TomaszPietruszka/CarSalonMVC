@@ -44,13 +44,13 @@ public class RunnerAppImpl implements RunnerApp {
                     }
                     break;
                 case 5:
-                    printerWrapper.print("Finish process of creating car: ");
+                    printerWrapper.print("\nFinish process of creating car: ");
                     if (!carSalonMVC.finish()) {
                         choice -= 2;
                     }
                     break;
                 case 6:
-                    printerWrapper.print("Congratulation! You created your new car!");
+                    printerWrapper.print("\nCongratulation! You created your new car!");
                     carSalonMVC.getCar();
                     return;
             }
