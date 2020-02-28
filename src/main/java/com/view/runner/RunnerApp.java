@@ -1,4 +1,4 @@
-package com.model.runner;
+package com.view.runner;
 
 import com.controller.printer.PrinterWrapper;
 import com.model.CarSalonMVC;

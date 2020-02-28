@@ -16,6 +16,8 @@ public interface CarSalonMVC {
 
         void chooseFuel();
 
+        boolean finish();
+
         Car getCar();
 
     }

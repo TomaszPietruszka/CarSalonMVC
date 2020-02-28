@@ -1,9 +1,6 @@
 package com.controller;
 
-import com.controller.choice.ChoiceBody;
-import com.controller.choice.ChoiceBrand;
-import com.controller.choice.ChoiceColor;
-import com.controller.choice.ChoiceFuel;
+import com.controller.choice.*;
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
 import com.model.carParts.Car;
@@ -20,9 +17,11 @@ public class CarSalonControllerImpl implements CarSalonMVC.Controller {
     private ChoiceBody choiceBody;
     private ChoiceColor choiceColor;
     private ChoiceFuel choiceFuel;
+    private Finish finish;
+
 
     public CarSalonControllerImpl(Wallet wallet, PrinterWrapper printerWrapper, ScannerWrapper scannerWrapper, ChoiceBody choiceBody,
-                                  ChoiceBrand choiceBrand, ChoiceColor choiceColor, ChoiceFuel choiceFuel) {
+                                  ChoiceBrand choiceBrand, ChoiceColor choiceColor, ChoiceFuel choiceFuel, Finish finish) {
         this.wallet = wallet;
         this.printerWrapper = printerWrapper;
         this.scannerWrapper = scannerWrapper;
@@ -30,6 +29,7 @@ public class CarSalonControllerImpl implements CarSalonMVC.Controller {
         this.choiceBrand = choiceBrand;
         this.choiceColor = choiceColor;
         this.choiceFuel = choiceFuel;
+        this.finish = finish;
     }
 
     @Override
@@ -55,6 +55,11 @@ public class CarSalonControllerImpl implements CarSalonMVC.Controller {
     @Override
     public void chooseFuel() {
         choiceFuel.chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+    }
+
+    @Override
+    public boolean finish() {
+       return finish.finish(car, wallet, scannerWrapper, printerWrapper);
     }
 
     @Override

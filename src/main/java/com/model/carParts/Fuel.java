@@ -2,7 +2,8 @@ package com.model.carParts;
 
 public enum Fuel {
     PETROL(0),
-    DIESEL(1000);
+    DIESEL(1000),
+    HYBRID(5000);
 
     public int price;
 

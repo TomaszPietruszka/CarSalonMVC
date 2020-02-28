@@ -17,6 +17,7 @@ class ChoiceBrandImplTest {
     ScannerWrapper scannerWrapper = Mockito.mock(ScannerWrapper.class);
     ChoiceBrand tested = new ChoiceBrandImpl();
 
+/*
     @Test
     public void chooseBmwBrand() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
@@ -40,11 +41,42 @@ class ChoiceBrandImplTest {
         Assertions.assertThrows(IllegalStateException.class, () -> tested.chooseBrand(car, wallet, scannerWrapper, printerWrapper));
     }
 
+*/
+
+
+
     @Test
     public void failChooseAudiBrand(){
         wallet = new Wallet(-1);
         Mockito.when(scannerWrapper.nextInt()).thenReturn(2);
         Assertions.assertThrows(IllegalStateException.class, () -> tested.chooseBrand(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+
+    @Test
+    public void tryMinusValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(-100);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseBrand(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+    @Test
+    public void tryMinusOneValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(-1);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseBrand(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+
+    @Test
+    public void tryPlusValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(400);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseBrand(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+
+    @Test
+    public void tryPlusOneValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(4);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseBrand(car, wallet, scannerWrapper, printerWrapper));
     }
 
 }

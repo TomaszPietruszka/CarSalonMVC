@@ -15,9 +15,10 @@ class CarSalonControllerImplTest {
     ChoiceBrand choiceBrand = Mockito.mock(ChoiceBrand.class);
     ChoiceColor choiceColor = Mockito.mock(ChoiceColor.class);
     ChoiceFuel choiceFuel = Mockito.mock(ChoiceFuel.class);
+    Finish finish = Mockito.mock(Finish.class);
 
     CarSalonControllerImpl tested = new CarSalonControllerImpl(wallet, printerWrapper, scannerWrapper,
-            choiceBody, choiceBrand, choiceColor, choiceFuel);
+            choiceBody, choiceBrand, choiceColor, choiceFuel, finish);
 
     @Test
     public void chooseBody() {
@@ -36,7 +37,7 @@ class CarSalonControllerImplTest {
     }
 
     @Test
-    public void ChooseColor() {
+    public void chooseColor() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
         tested.createCar();
         tested.chooseColor();
@@ -44,7 +45,7 @@ class CarSalonControllerImplTest {
     }
 
     @Test
-    public void ChooseFuel() {
+    public void chooseFuel() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
         tested.createCar();
         tested.chooseFuel();

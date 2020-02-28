@@ -16,7 +16,7 @@ class ChoiceColorImplTest {
     ScannerWrapper scannerWrapper = Mockito.mock(ScannerWrapper.class);
     ChoiceColor tested = new ChoiceColorImpl();
 
-    @Test
+/*    @Test
     public void chooseWhiteColor() {
         Mockito.when(scannerWrapper.nextInt()).thenReturn(1);
         tested.chooseColor(car, wallet, scannerWrapper, printerWrapper);
@@ -44,6 +44,32 @@ class ChoiceColorImplTest {
         wallet = new Wallet(-1);
         Mockito.when(scannerWrapper.nextInt()).thenReturn(2);
         Assertions.assertThrows(IllegalStateException.class, () -> tested.chooseColor(car, wallet, scannerWrapper, printerWrapper));
+    }*/
+
+    @Test
+    public void tryMinusValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(-100);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseColor(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+    @Test
+    public void tryMinusOneValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(-1);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseColor(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+
+    @Test
+    public void tryPlusValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(400);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseColor(car, wallet, scannerWrapper, printerWrapper));
+    }
+
+
+    @Test
+    public void tryPlusOneValueOverBound() {
+        Mockito.when(scannerWrapper.nextInt()).thenReturn(4);
+        Assertions.assertThrows(StackOverflowError.class, () -> tested.chooseColor(car, wallet, scannerWrapper, printerWrapper));
     }
 
 }

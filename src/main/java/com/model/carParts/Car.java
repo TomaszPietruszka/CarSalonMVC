@@ -45,11 +45,11 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "body=" + body +
-                ", brand=" + brand +
-                ", color=" + color +
-                ", fuel=" + fuel +
+        return "Car {" +
+                "body= " + body +
+                ", brand= " + brand +
+                ", color= " + color +
+                ", fuel= " + fuel +
                 '}';
     }
 }

@@ -6,31 +6,64 @@ import com.model.carParts.Car;
 import com.model.wallet.Wallet;
 import com.model.carParts.Fuel;
 
-public class ChoiceFuelImpl implements ChoiceFuel {
+public class ChoiceFuelImpl extends ChoiceSetter implements ChoiceFuel {
+
     @Override
     public void chooseFuel(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
-        printerWrapper.print("Press 1 to choose petrol \nPress 2 to choose diesel \nPress 0 to back");
-        car.setFuel(null);
-        int option = scannerWrapper.nextInt();
-        switch (option) {
+        if (car.getFuel() != null) {
+            turnMoneyBack(wallet, printerWrapper, car.getFuel().price);
+            car.setFuel(null);
+        }
+
+        printOptions(printerWrapper);
+
+        switch (getOption(car, wallet, scannerWrapper, printerWrapper)) {
             case 1:
-                if (wallet.getMoney() >= Fuel.PETROL.price) {
-                    car.setFuel(Fuel.PETROL);
-                    printerWrapper.print("PETROL");
-                } else {
-                    throw new IllegalStateException("Not enough money");
-                }
+                setCase(car, wallet, scannerWrapper, printerWrapper, Fuel.PETROL);
                 break;
             case 2:
-                if (wallet.getMoney() >= Fuel.DIESEL.price) {
-                    car.setFuel(Fuel.DIESEL);
-                    printerWrapper.print("DIESEL");
-                } else {
-                    throw new IllegalStateException("Not enough money");
-                }
+                setCase(car, wallet, scannerWrapper, printerWrapper, Fuel.DIESEL);
+                break;
+            case 3:
+                setCase(car, wallet, scannerWrapper, printerWrapper, Fuel.HYBRID);
                 break;
             case 0:
                 return;
+        }
+    }
+
+    public void setCase(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper, Fuel fuel) {
+        if (wallet.getMoney() <= fuel.price) {
+            printerWrapper.print("You haven't enough money");
+            chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+        } else {
+            car.setFuel(fuel);
+            takeMoney(wallet, printerWrapper, car.getFuel().price);
+            printerWrapper.print("You choose " + car.getFuel() + " fuel");
+        }
+    }
+
+    @Override
+    int getOption(Car car, Wallet wallet, ScannerWrapper scannerWrapper, PrinterWrapper printerWrapper) {
+        int option = scannerWrapper.nextInt();
+        int lowBound = 0;
+        int highBound = Fuel.values().length;
+
+        if (option < lowBound || option > highBound) {
+            printerWrapper.print("Wrong number!");
+            chooseFuel(car, wallet, scannerWrapper, printerWrapper);
+            return 0;
+        } else {
+            return option;
+        }
+    }
+
+    @Override
+    void printOptions(PrinterWrapper printerWrapper) {
+        int number = 0;
+        for (Fuel value : Fuel.values()) {
+            number++;
+            printerWrapper.print(number + " " + value + " cost $" + value.price);
         }
     }
 }

@@ -2,7 +2,8 @@ package com.model.carParts;
 
 public enum Brand {
     BMW(0),
-    AUDI(1000);
+    MERCEDES(5000),
+    AUDI(10000);
 
     public int price;
 

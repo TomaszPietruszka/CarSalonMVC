@@ -1,4 +1,4 @@
-package com.model.runner;
+package com.view.runner;
 
 import com.controller.printer.PrinterWrapper;
 import com.model.CarSalonMVC;
@@ -16,46 +16,47 @@ public class RunnerAppImpl implements RunnerApp {
                     carSalonMVC.createCar();
                     break;
                 case 1:
-                    choice = setCaseOne(carSalonMVC, printerWrapper, choice);
+                    printerWrapper.print("\nSelect number of body or press 0 too back.");
+                    carSalonMVC.chooseBody();
+                    if (carSalonMVC.getCar().getBody() == null) {
+                        choice -= 2;
+                    }
                     break;
                 case 2:
-                    printerWrapper.print("Choose brand: ");
+                    printerWrapper.print("\nSelect number of brand or press 0 too back.");
                     carSalonMVC.chooseBrand();
                     if (carSalonMVC.getCar().getBrand() == null) {
                         choice -= 2;
                     }
                     break;
                 case 3:
-                    printerWrapper.print("Choose color: ");
+                    printerWrapper.print("\nSelect number of color or press 0 too back.");
                     carSalonMVC.chooseColor();
                     if (carSalonMVC.getCar().getColor() == null) {
                         choice -= 2;
                     }
                     break;
                 case 4:
-                    printerWrapper.print("Choose fuel: ");
+                    printerWrapper.print("\nSelect number of fuel or press 0 too back.");
                     carSalonMVC.chooseFuel();
                     if (carSalonMVC.getCar().getFuel() == null) {
                         choice -= 2;
                     }
                     break;
                 case 5:
-                    printerWrapper.print("Created car:");
+                    printerWrapper.print("Finish process of creating car: ");
+                    if (!carSalonMVC.finish()) {
+                        choice -= 2;
+                    }
+                    break;
+                case 6:
+                    printerWrapper.print("Congratulation! You created your new car!");
                     carSalonMVC.getCar();
-                    printerWrapper.print(carSalonMVC.getCar().toString());
                     return;
             }
             choice++;
         }
     }
 
-    public int setCaseOne(CarSalonMVC.Controller carSalonMVC, PrinterWrapper printerWrapper, int i) {
-        printerWrapper.print("Choose body: ");
-        carSalonMVC.chooseBody();
-        if (carSalonMVC.getCar().getBody() == null) {
-            i -= 2;
-        }
-        return i;
-    }
 
 }
