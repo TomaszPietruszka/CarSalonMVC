@@ -1,9 +1,4 @@
-package com.model.carParts;
-
-import com.model.carParts.Body;
-import com.model.carParts.Brand;
-import com.model.carParts.Color;
-import com.model.carParts.Fuel;
+package com.model.carparts;
 
 public class Car {
     private Body body;

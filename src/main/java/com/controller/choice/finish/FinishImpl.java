@@ -1,8 +1,8 @@
-package com.controller.choice;
+package com.controller.choice.finish;
 
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
-import com.model.carParts.Car;
+import com.model.carparts.Car;
 import com.model.wallet.Wallet;
 
 public class FinishImpl implements Finish {

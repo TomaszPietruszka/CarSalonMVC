@@ -1,8 +1,10 @@
 package com.controller.choice;
 
+import com.controller.choice.finish.Finish;
+import com.controller.choice.finish.FinishImpl;
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
-import com.model.carParts.Car;
+import com.model.carparts.Car;
 import com.model.wallet.Wallet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

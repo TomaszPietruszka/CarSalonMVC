@@ -1,10 +1,10 @@
-package com.controller.choice;
+package com.controller.choice.choicebrand;
 
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
-import com.model.carParts.Car;
+import com.model.carparts.Car;
 import com.model.wallet.Wallet;
-import com.model.carParts.Brand;
+import com.model.carparts.Brand;
 
 public class ChoiceBrandImpl implements ChoiceBrand {
 

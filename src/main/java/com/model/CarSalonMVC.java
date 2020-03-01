@@ -1,12 +1,13 @@
 package com.model;
 
-import com.model.carParts.Car;
+import com.controller.printer.PrinterWrapper;
+import com.model.carparts.Car;
 
 public interface CarSalonMVC {
 
     interface Controller {
 
-        void createCar();
+        void setCar(Car car);
 
         void chooseBody();
 
@@ -23,6 +24,8 @@ public interface CarSalonMVC {
     }
 
     interface View {
+
+        void run(CarSalonMVC.Controller carSalonMVC, PrinterWrapper printerWrapper, Car car);
 
     }
 }

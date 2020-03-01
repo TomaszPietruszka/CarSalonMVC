@@ -1,11 +1,13 @@
 package com.controller.choice;
 
 
+import com.controller.choice.choicebrand.ChoiceBrand;
+import com.controller.choice.choicebrand.ChoiceBrandImpl;
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
-import com.model.carParts.Car;
+import com.model.carparts.Car;
 import com.model.wallet.Wallet;
-import com.model.carParts.Brand;
+import com.model.carparts.Brand;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

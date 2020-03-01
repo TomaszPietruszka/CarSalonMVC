@@ -1,10 +1,12 @@
 package com.controller.choice;
 
+import com.controller.choice.choicefuel.ChoiceFuel;
+import com.controller.choice.choicefuel.ChoiceFuelImpl;
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
-import com.model.carParts.Car;
+import com.model.carparts.Car;
 import com.model.wallet.Wallet;
-import com.model.carParts.Fuel;
+import com.model.carparts.Fuel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

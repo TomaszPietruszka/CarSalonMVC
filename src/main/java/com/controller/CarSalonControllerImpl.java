@@ -1,9 +1,13 @@
 package com.controller;
 
-import com.controller.choice.*;
+import com.controller.choice.choicebody.ChoiceBody;
+import com.controller.choice.choicebrand.ChoiceBrand;
+import com.controller.choice.choicecolor.ChoiceColor;
+import com.controller.choice.choicefuel.ChoiceFuel;
+import com.controller.choice.finish.Finish;
 import com.controller.printer.PrinterWrapper;
 import com.controller.scanner.ScannerWrapper;
-import com.model.carParts.Car;
+import com.model.carparts.Car;
 import com.model.CarSalonMVC;
 import com.model.wallet.Wallet;
 
@@ -33,8 +37,8 @@ public class CarSalonControllerImpl implements CarSalonMVC.Controller {
     }
 
     @Override
-    public void createCar() {
-        car = new Car();
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override

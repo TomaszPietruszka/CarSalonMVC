@@ -2,18 +2,19 @@ package com.view.runner;
 
 import com.controller.printer.PrinterWrapper;
 import com.model.CarSalonMVC;
+import com.model.carparts.Car;
 
 public class RunnerAppImpl implements RunnerApp {
 
 
     @Override
-    public void run(CarSalonMVC.Controller carSalonMVC, PrinterWrapper printerWrapper) {
+    public void run(CarSalonMVC.Controller carSalonMVC, PrinterWrapper printerWrapper, Car car) {
         int choice = 0;
         while (true) {
             switch (choice) {
                 case 0:
                     printerWrapper.print("Create your own car!");
-                    carSalonMVC.createCar();
+                    carSalonMVC.setCar(car);
                     break;
                 case 1:
                     printerWrapper.print("\nSelect number of body or press 0 too back.");

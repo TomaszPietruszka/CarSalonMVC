@@ -1,4 +1,4 @@
-package com.model.carParts;
+package com.model.carparts;
 
 public enum Color {
     WHITE(0),
